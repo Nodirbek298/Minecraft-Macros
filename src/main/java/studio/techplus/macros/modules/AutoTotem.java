@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
+import org.lwjgl.glfw.GLFW;
 
 public class AutoTotem extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
@@ -11,7 +12,23 @@ public class AutoTotem extends Module {
     private static final long COOLDOWN_MS = 500L;
     
     public AutoTotem() {
-        super("AutoTotem", "Automatically moves totems to offhand");
+        super("AutoTotem", "Automatically moves totems to offhand", GLFW.GLFW_KEY_KP_1);
+    }
+    
+    @Override
+    public void onEnable() {
+        super.onEnable();
+        if (mc.player != null) {
+            mc.player.sendMessage(net.minecraft.text.Text.literal("§a[AutoTotem] Enabled"), false);
+        }
+    }
+    
+    @Override
+    public void onDisable() {
+        super.onDisable();
+        if (mc.player != null) {
+            mc.player.sendMessage(net.minecraft.text.Text.literal("§c[AutoTotem] Disabled"), false);
+        }
     }
     
     @Override
@@ -33,8 +50,6 @@ public class AutoTotem extends Module {
         for (int hotbarSlot = 0; hotbarSlot < 9; hotbarSlot++) {
             ItemStack stack = mc.player.getInventory().getStack(hotbarSlot);
             if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
-                System.out.println("[AutoTotem] Found totem in hotbar slot " + hotbarSlot);
-                
                 // Just swaps the hotbar slot with offhand (like pressing F)
                 mc.interactionManager.clickSlot(
                     mc.player.playerScreenHandler.syncId,
@@ -57,8 +72,6 @@ public class AutoTotem extends Module {
             return;
         }
         
-        System.out.println("[AutoTotem] Inventory opened!");
-        
         long now = System.currentTimeMillis();
         if (now - lastMoveMs < COOLDOWN_MS) {
             return;
@@ -72,7 +85,6 @@ public class AutoTotem extends Module {
         for (int i = 0; i < 36; i++) {
             ItemStack stack = mc.player.getInventory().getStack(i);
             if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
-                System.out.println("[AutoTotem] Found totem in inventory slot " + i);
                 int slotId = i < 9 ? i + 36 : i;
                 
                 // Pick up the totem first

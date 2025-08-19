@@ -25,8 +25,8 @@ public class ModuleManager {
         // Register all modules here
         modules.add(new AutoTotem());
         
-        // Enable modules by default (Will be confugurable in the future)
-        getModule("AutoTotem").onEnable();
+        // Now modules are disabled by default.
+        // AutoTotem: Numpad 1
     }
     
     public void onTick() {

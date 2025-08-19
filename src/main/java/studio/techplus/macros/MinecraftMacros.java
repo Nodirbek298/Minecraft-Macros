@@ -10,6 +10,9 @@ public class MinecraftMacros implements ClientModInitializer {
     public void onInitializeClient() {
         moduleManager = ModuleManager.getInstance();
         
+        // Initialize keybind system
+        KeybindManager.init();
+        
         // Handle module ticks
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             moduleManager.onTick();
