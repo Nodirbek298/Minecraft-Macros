@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "macros",
+  "version": "${version}",
+  "name": "Minecraft Macros",
+  "description": "My take on macros for Minecraft.",
+  "authors": ["Nodirbek"],
+  "contact": {
+    "website": "https://techplus.studio"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["studio.techplus.macros.MinecraftMacros"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "fabric-api": "*",
+    "minecraft": "1.21.8"
+  }
+}
