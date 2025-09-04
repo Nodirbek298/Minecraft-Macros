@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import studio.techplus.macros.modules.Module;
 import studio.techplus.macros.modules.AutoTotem;
+import studio.techplus.macros.modules.TridentDuper;
 
 public class ModuleManager {
     private static ModuleManager instance;
@@ -24,9 +25,11 @@ public class ModuleManager {
     private void initModules() {
         // Register all modules here
         modules.add(new AutoTotem());
+        modules.add(new TridentDuper());
         
         // Now modules are disabled by default.
         // AutoTotem: Numpad 1
+        // TridentDuper: Numpad 2
     }
     
     public void onTick() {
